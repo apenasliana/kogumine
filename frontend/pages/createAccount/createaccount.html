@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kogumine - Create Account Page</title>
+    <link rel="stylesheet" href="style.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
+    </style>
+
+</head>
+<body>
+    <section id="container">
+        <div class="wrapper">
+            <div class="logo">
+                <div class="content">
+                    <a href="../../index.html">
+                        <img src="../images/logo.png" alt="logo" class="logoimg">
+                    </a>
+                    <h2 id="">Criar sua Conta</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.
+                    </p>
+
+                </div>
+            </div>
+            <div class="card">
+                <p id="loginERROR" class="display-none">Email ou Senha inválido!</p>
+                <div class="login">
+                    <form action="main.js" method="post">
+                        <input id="username" class="inputText" placeholder="Username" type="text"/>
+                        <input id="email" class="inputText" placeholder="Email" type="text"/>
+                        <input id="senha" class="inputText" placeholder="Senha" type="password"/>
+                        <button id="confirm" type="button" onClick="getDados()">
+                            <div>
+                                <p>Criar</p>
+                            </div>
+                        </button>
+                    </form>
+            </div>
+        </div>
+        <div id="footer">
+            <div class="wrapper">
+                <a target="_blank" href="">
+                    <img src="" alt="" class="logoimg">  
+                </a>
+                <p>Copyright 2022 | All Rights Reserved</p>
+
+            </div>
+        </div>
+    </section>
+    <script src="main.js"></script>
+</body>
+
+</html>

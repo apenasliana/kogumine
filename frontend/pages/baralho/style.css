@@ -1,0 +1,222 @@
+html,
+body {
+   background-color: #FFF0F0;
+   margin:0;
+   width:100%;
+   height:100%;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+body {
+    margin:auto;
+}
+#container {
+    min-height:100%;
+    position:relative;
+    padding-bottom: 130px;   /* Height of the footer */
+
+ }
+.wrapper {
+    margin: 30px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 533px;
+    height: fit-content;
+
+}
+
+/* ================ content ================== */
+.logo{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 533px;
+}
+.logoimg {
+    height: 168px;
+}
+
+.content h2 {
+    margin-top: 0;
+    padding-top: 30px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 46px;
+    /* identical to box height, or 135% */
+
+
+    color: #170F49;
+}
+
+.content p {
+    margin: 0;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+    /* or 167% */
+
+    text-align: center;
+
+    /* Neutral/600 */
+
+    color: #6F6C90;
+}
+
+/*===================== CARD ==============================*/
+.card{
+    margin: 0 auto;
+    padding: 60px;
+    width: fit-content;
+    height: fit-content;
+
+    background: #FFFFFF;
+    box-shadow: 8.32785px 8.32785px 24.9835px rgba(2, 2, 70, 0.15);
+    border-radius: 31.2294px;
+    z-index: 100;
+}
+.card p {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 25px;
+    /* identical to box height, or 160% */
+    text-align: center;
+    /* Secondary 2 */
+
+    color: rgba(0, 0, 0, 0.5);
+}
+.card .login input {
+
+    width: 260px;
+    height: 30px;
+
+    text-align: center;
+    /* White */
+
+    background: #FFFFFF;
+    /* Secondary/Color 1 */
+
+    border: 2px solid #EFF0F7;
+    box-shadow: 8.32785px 8.32785px 24.9835px rgba(2, 2, 70, 0.05);
+    border-radius: 8.32785px;
+
+
+}
+
+.card .login form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+.card .login #confirm{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 260px;
+    height: 44px;
+    background: #020246;
+    border-radius: 8px;
+}
+.card .login #confirm p{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+
+
+    /* White */
+
+    color: #FFFFFF;
+}
+.display-none{
+    display: none;
+}
+.card #loginERROR{
+    color: #db4e4e;
+    font-weight: 400;
+
+}
+.card .login .loginError {
+    border: 3px solid #db4e4e;
+    border-radius: 8.32785px;
+}
+/* ========================== SOCIAL BUTTONS (in card)======================= */
+.card .social-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 12px;
+    
+}
+.card .s-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 374.75px;
+    height: 52.82px;
+
+
+    /* White */
+    background: #FFFFFF;
+    /* Secondary */
+    
+    border: 2px solid #EFF0F7;
+    box-shadow: 8.32785px 8.32785px 24.9835px rgba(2, 2, 70, 0.05);
+    border-radius: 8.32785px;
+}
+.card .s-buttons p{
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18.7377px;
+    line-height: 31px;
+    /* identical to box height, or 167% */
+
+    /* Primary */
+
+    color: #020246;
+}
+
+/* ========================= Footer ======================*/
+#footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:130px;   
+    background: #FFFFFF;
+    display: flex;
+    justify-content: center;
+ }
+ #footer .wrapper{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+ }
+
+ #footer img {
+    height: 73px;
+}
