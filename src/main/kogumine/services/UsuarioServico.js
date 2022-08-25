@@ -15,7 +15,7 @@ class UsuarioServico{
                 if(result) {
                     const foreignKey = result.insertId
                     try{
-                        const resultado = await query("INSERT INTO colecao (idUsuario) VALUE (?)", foreignKey)
+                        const resultado = await query("INSERT INTO colecao (idUsuario,custoTotal,qtd_mythic,qtd_rare,qtd_common,totalCards,qtd_uncommon) VALUE (?,0,0,0,0,0,0)", foreignKey)
                         return resultado
                     }catch(err){
                         return err

@@ -44,14 +44,30 @@ class ColecaoServico{
   //         return err
   //     }
   // }
+    static async getColecaoData(idColecao){
+      const query = util.promisify(db.query).bind(db)
+
+
+      const sqlSelectColecao = "SELECT * FROM colecao WHERE id = ?"
+
+      try{
+        const retornarColecao = await query(sqlSelectColecao,idColecao)
+        console.log(retornarColecao)
+        return retornarColecao
+
+      }catch(err){
+        return err
+      }
+    }
+
 
     static async adicionarCarta(carta, idColecao,qtdCarta){
         const query = util.promisify(db.query).bind(db)
 
 
         try{
-            const result = await query("SELECT * FROM carta WHERE nome = (?)",[carta.nome])
-            if(result.length == 0){
+            const cartaCadastrada = await query("SELECT * FROM carta WHERE nome = (?)",[carta.nome])
+            if(cartaCadastrada.length == 0){ //A carta nao está cadastrada, cadastrar e dps inserir na colecao
                 const sqlInsert = "INSERT INTO carta (nome,raridade,preco) VALUE (?,?,?)"
 
                 const resulte = await query(sqlInsert,[carta.nome, carta.raridade, carta.preco])
@@ -60,27 +76,69 @@ class ColecaoServico{
                 if(cartaExiste.length != 0){
                     let novaQtdCarta = parseInt(cartaExiste[0].qtdCarta) + parseInt(qtdCarta)
                     await query("UPDATE carta_colecao SET qtdCarta = (?) WHERE idCarta = (?) AND idColecao = (?)",[novaQtdCarta,idCarta,idColecao])
+                    // console.log('if 1')
+                    
+                    this.atualizarColecao(carta, idColecao,qtdCarta)//
+
                 }else{
-                    const resultado = await query("INSERT INTO carta_colecao (idCarta,idColecao,qtdCarta) VALUE (?,?,?)",[idCarta,idColecao,qtdCarta])
-                    return resultado
+                  
+                  const resultado = await query("INSERT INTO carta_colecao (idCarta,idColecao,qtdCarta) VALUE (?,?,?)",[idCarta,idColecao,qtdCarta])
+                  this.atualizarColecao(carta, idColecao,qtdCarta)//
+                  // console.log('else 1')
+                  return resultado
                 }
             }else{
-                const idCarta = result[0].id
+                const idCarta = cartaCadastrada[0].id
 
                 const cartaExiste = await query("SELECT * FROM carta_colecao WHERE idCarta = (?) AND idColecao = (?) ",[idCarta,idColecao])
                 if(cartaExiste.length != 0){
                     let novaQtdCarta = parseInt(cartaExiste[0].qtdCarta) + parseInt(qtdCarta)
                     await query("UPDATE carta_colecao SET qtdCarta = (?) WHERE idCarta = (?) AND idColecao = (?)",[novaQtdCarta,idCarta,idColecao])
+                    // console.log('if 2')
+                    this.atualizarColecao(carta, idColecao,qtdCarta)//
+                    
+
+
                 }else{
 
-                    const resulte = await query("INSERT INTO carta_colecao (idCarta,idColecao,qtdCarta) VALUE (?,?,?)",[idCarta,idColecao,qtdCarta])
-                    return resulte
+                  
+                  const resulte = await query("INSERT INTO carta_colecao (idCarta,idColecao,qtdCarta) VALUE (?,?,?)",[idCarta,idColecao,qtdCarta])
+                  // console.log('else 2')
+                  this.atualizarColecao(carta, idColecao,qtdCarta)//
+                  return resulte
                 }
             }
         }catch(err){
             console.log(err)
             return err
         }
+    }
+    static async atualizarColecao(carta, idColecao, qtdCarta){
+      const query = util.promisify(db.query).bind(db);
+
+      const colecao = await query("SELECT * FROM colecao WHERE id = (?) ",[idColecao])
+
+      const novoCustoTotal = parseFloat(colecao[0].custoTotal) + parseFloat(carta.preco * qtdCarta)
+      const novaQtdTotal = parseInt(colecao[0].totalCards) + parseInt(qtdCarta)
+
+
+      if(carta.raridade == 'mythic' || carta.raridade == 'rare' ||carta.raridade == 'common' ||carta.raridade == 'uncommon'){
+        let raridadeString = "qtd_"
+        raridadeString += carta.raridade
+        const novaQtdRaridade = parseInt(colecao[0][raridadeString]) + parseInt(qtdCarta)
+        const sqlInserIntoCollection = `UPDATE colecao  SET custoTotal = ?, ${raridadeString} = ? , totalCards = ? WHERE id = ${idColecao}`
+        await query(sqlInserIntoCollection,[novoCustoTotal,novaQtdRaridade,novaQtdTotal])
+
+      }else{
+
+        const sqlInserIntoCollection = `UPDATE colecao SET custoTotal = ?, totalCards = ? WHERE id = ${idColecao}`
+        await query(sqlInserIntoCollection,[novoCustoTotal,novaQtdTotal])
+
+      }
+
+
+
+
     }
     static async removerCarta(id, idCarta) {
         const query = util.promisify(db.query).bind(db);

@@ -16,7 +16,7 @@ async function getColecao(){
     });
 }
 
-
+//atualizar com react
 function mostrarColecao(data){
     const listItem = document.createElement("li")
     const listNome = document.createElement("p")
@@ -41,9 +41,55 @@ function mostrarColecao(data){
     
 }
 
+async function getColecaoDados(){
+    const Usuario = JSON.parse(localStorage.getItem('Usuario'))
+    const response = await fetch(`http://localhost:3000/colecao/${Usuario.idColecao}/data`)
+    const data = await response.json()
+
+
+    mostrarColecaoData(data)
+}
+
+//atualizar com react
+async function mostrarColecaoData(data){
+
+    const listItem = document.createElement("li")
+    const listCusto = document.createElement("p")
+    const listQtdCarta = document.createElement("p")
+
+    const listRaridade = document.createElement("p")
+    const listMythic = document.createElement("p")
+    const listRare = document.createElement("p")
+    const listUncommon = document.createElement("p")
+    const listCommon = document.createElement("p")
+
+
+
+
+    const listaDeCartas = document.getElementById("dadosColecao")
+
+    listCusto.innerText = "Custo da Coleção: $" + data[0].custoTotal
+    listQtdCarta.innerText = "Quantidade de Cartas: "+ data[0].totalCards
+
+    listRaridade.innerText = " ---- Cartas por Raridade ---- "
+    listMythic.innerText = "Mythic: " + data[0].qtd_mythic
+    listRare.innerText = "Rare: " + data[0].qtd_rare
+    listUncommon.innerText = "Uncommon: " + data[0].qtd_uncommon
+    listCommon.innerText = "Common: " + data[0].qtd_common
+
+
+
+    listItem.classList.add("list-item")
+
+
+    listItem.append(listCusto,listQtdCarta,listRaridade,listMythic,listRare, listUncommon, listCommon)
+    listaDeCartas.append(listItem)
+
+}
 
 
 window.addEventListener('load', (event)=>{
     getColecao()
+    getColecaoDados()
 })
 

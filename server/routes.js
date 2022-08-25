@@ -30,7 +30,7 @@ router.post("/auth", UsuarioController.autenticar) // autenticador
 router.post("/colecao/:id", ColecaoController.adicionarCarta)
 router.get("/colecao/:id", ColecaoController.listarCartasColecao)
 router.get("/colecao/:id/carta", ColecaoController.getCartasColecao) // 
-// router.get("/colecao/:id/:idC", ColecaoController.getCartasColecao)
+router.get("/colecao/:id/data", ColecaoController.getColecaoData)
 
 router.delete("/colecao/:id/carta/:idC", ColecaoController.removerCarta)
 

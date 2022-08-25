@@ -15,12 +15,13 @@ class ColecaoController{
             res.send(result)
         })
     }
-    static listColecao(req,res){
-        const sqlSelectAll = "SELECT * FROM colecao"
-        db.query(sqlSelectAll, (err,result)=>{
-            res.send(result)
-        })
-    }
+
+    // static listColecao(req,res){
+    //     const sqlSelectAll = "SELECT * FROM colecao"
+    //     db.query(sqlSelectAll, (err,result)=>{
+    //         res.send(result)
+    //     })
+    // }
 
 
 
@@ -31,8 +32,7 @@ class ColecaoController{
             res.send(result)
         })
     }
-
-
+    
     // static getCartasColecao(req,res){
     //     const idCarta = req.params.idC
     //     const idColecao = req.params.id
@@ -40,6 +40,15 @@ class ColecaoController{
     //         res.send(result)
     //     })
     // }
+    
+
+    static getColecaoData(req,res){
+        const idColecao = req.params.id
+
+        ColecaoServico.getColecaoData(idColecao).then((result)=>{
+            res.send(result)
+        })
+    }
 
 
     static adicionarCarta(req,res){
@@ -54,13 +63,8 @@ class ColecaoController{
         ColecaoServico.adicionarCarta(carta, idColecao,qtdCarta).then((result)=>{
             res.send(result)
         })
-
-        
-
-
-
-
     }
+    
     static removerCarta(req,res){
         const idColecao = req.params.id
         const idCarta = req.params.idC
