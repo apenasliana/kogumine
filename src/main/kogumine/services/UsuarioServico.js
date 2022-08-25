@@ -64,7 +64,6 @@ class UsuarioServico{
         }catch(err){
             return err
         }
-
     }
 
     static async putUsuario(usuario,id){
@@ -80,11 +79,49 @@ class UsuarioServico{
         }
 
     }
+    static async putUsuarioUsername(username,id){
+        const query = util.promisify(db.query).bind(db)
+        const sqlUpdate = "UPDATE usuarios SET username = ? WHERE id = ?"
+        
+        try{
+            const result = await query(sqlUpdate, [username, id] )
+                return result
+
+        }catch(err){
+            return err
+        }
+        
+
+    }
+    static async putUsuarioSenha(senha,id){
+        const query = util.promisify(db.query).bind(db)
+
+        const sqlUpdate = "UPDATE usuarios SET senha = ? WHERE id = ?"
+        try{
+            const result = await query(sqlUpdate, [senha, id] )
+                return result
+
+        }catch(err){
+            return err
+        }
+
+    }
+    static async putUsuarioEmail(email,id){
+        const query = util.promisify(db.query).bind(db)
+        const sqlUpdate = "UPDATE usuarios SET email = ? WHERE id = ?"
+        try{
+            const result = await query(sqlUpdate, [email, id] )
+            return result
+            
+        }catch(err){
+            return err
+        }
+    }
 
 
     static validarEmail(email){
         const sqlEmailSearch = "SELECT email FROM usuarios WHERE email = (?)"
-
+        
         db.query(sqlEmailSearch,email, (err,result)=>{
             if(err) {console.log(err)}
             if(result == []) {

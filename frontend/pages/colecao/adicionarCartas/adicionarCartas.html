@@ -16,26 +16,22 @@
         <div class="wrapper">
             <div class="logo">
                 <div class="content">
-                    <a href="../home/home.html">
-                        <img src="../images/logo.png" alt="logo" class="logoimg">       
+                    <a href="../../home/home.html">
+                        <img src="../../images/logo.png" alt="logo" class="logoimg">       
                     </a>
-                    <h2 id="">Sua Coleção</h2>
+                    <h2 id="">Adicionar Cartas</h2>
                 </div>
             </div>
             <div class="card">
                 <div class="login">
-                    <form>
-                        <button class="confirm" type="button" onClick="visitarAdicionarCartas()">
+                    <form method="post">
+                        <input id="adicionarCarta" class="inputText" placeholder="Nome Da Carta" type="text"/>
+                        <input id="qtdCarta" class="inputText" placeholder="Quantidade" type="text"/>
+                        <button id="confirm" type="button" onClick="addCarta()">
                             <div>
-                                <p>Adicionar Cartas</p>
+                                <p>adicionarCarta</p>
                             </div>
                         </button>
-                        <button class="confirm" type="button" onClick="visitarPesquisarCartas()">
-                            <div>
-                                <p>Pesquisar Cartas</p>
-                            </div>
-                        </button>
-                        
                     </form>
                     <ul id="listaDeCartas"></ul>
                 </div>

@@ -9,8 +9,6 @@ class ColecaoController{
     ColecaoServico
 
 
-
-
     static listarCartasColecao(req,res){
         const idColecao = req.params.id
         ColecaoServico.listarCartasColecao(idColecao).then((result)=>{
@@ -23,6 +21,27 @@ class ColecaoController{
             res.send(result)
         })
     }
+
+
+
+    static getCartasColecao(req,res){
+        const nome = req.query.nome
+        const idColecao = req.params.id
+        ColecaoServico.getCartasColecao(nome,idColecao).then((result)=>{
+            res.send(result)
+        })
+    }
+
+
+    // static getCartasColecao(req,res){
+    //     const idCarta = req.params.idC
+    //     const idColecao = req.params.id
+    //     ColecaoServico.getCartasColecao(idCarta,idColecao).then((result)=>{
+    //         res.send(result)
+    //     })
+    // }
+
+
     static adicionarCarta(req,res){
         const idColecao = req.params.id
         const nomeCarta = req.body.nome

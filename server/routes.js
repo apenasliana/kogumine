@@ -10,18 +10,29 @@ router.get("/", (req, res)=>{
     res.send("hello world")
 })
 // usuario //
-router.post("/usuarios", UsuarioController.postUsuario)
-router.delete("/usuarios/:id", UsuarioController.deleteUsuario)
-router.get("/usuarios", UsuarioController.listUsuario)
-router.get("/usuarios/:id", UsuarioController.getUsuario)
-router.put("/usuarios/:id", UsuarioController.putUsuario)
-router.post("/auth", UsuarioController.autenticar)
+router.post("/usuarios", UsuarioController.postUsuario) //criar usuario
+router.delete("/usuarios/:id", UsuarioController.deleteUsuario) // deletar usuario
+router.get("/usuarios", UsuarioController.listUsuario) //listar usuario
+router.get("/usuarios/:id", UsuarioController.getUsuario) // get usuario
+router.put("/usuarios/:id", UsuarioController.putUsuario) // atualizar TODOS os dados
+
+// confirmar se o email ou username existe antes de fazer a alteracao
+router.put("/usuarios/user/:id", UsuarioController.putUsuarioUsername) // atualizar dados USERNAME
+router.put("/usuarios/senha/:id", UsuarioController.putUsuarioSenha) // atualizar dados SENHA
+router.put("/usuarios/email/:id", UsuarioController.putUsuarioEmail) // atualizar dados EMAIL
+
+router.post("/auth", UsuarioController.autenticar) // autenticador
+
+
 
 // colecao //
 
-router.get("/colecao/:id", ColecaoController.listarCartasColecao)
-router.delete("/colecao/:id/carta/:idC", ColecaoController.removerCarta)
 router.post("/colecao/:id", ColecaoController.adicionarCarta)
+router.get("/colecao/:id", ColecaoController.listarCartasColecao)
+router.get("/colecao/:id/carta", ColecaoController.getCartasColecao) // 
+// router.get("/colecao/:id/:idC", ColecaoController.getCartasColecao)
+
+router.delete("/colecao/:id/carta/:idC", ColecaoController.removerCarta)
 
 
 // baralho //

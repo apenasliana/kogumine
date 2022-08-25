@@ -14,6 +14,37 @@ class ColecaoServico{
         }
     }
 
+    // get
+    static async getCartasColecao(nome,idColecao){
+      const query = util.promisify(db.query).bind(db)
+      //console.log(nome)
+
+      const sqlSelectCardId = "SELECT id FROM carta WHERE nome = (?)"
+      const sqlSelectCartaColecao = "SELECT colecao.id,colecao.idUsuario,carta.*, carta_colecao.qtdCarta FROM colecao JOIN carta_colecao ON carta_colecao.idColecao = colecao.id JOIN carta ON carta.id = carta_colecao.idCarta WHERE colecao.id = (?) AND carta_colecao.idCarta = (?)"
+      
+      try{
+          const cardId = await query(sqlSelectCardId,nome)
+          
+          console.log(cardId)
+          const result = await query(sqlSelectCartaColecao,[idColecao,cardId[0].id])
+          console.log(result)
+          return result
+      }catch(err){
+          return err
+      }
+  }
+  //   static async getCartasColecao(nome,idColecao){
+  //     const query = util.promisify(db.query).bind(db)
+      
+  //     const sqlSelectCartaColecao = "SELECT colecao.id,colecao.idUsuario,carta.*, carta_colecao.qtdCarta FROM colecao JOIN carta_colecao ON carta_colecao.idColecao = colecao.id JOIN carta ON carta.id = carta_colecao.idCarta WHERE colecao.id = (?) AND carta_colecao.idCarta = (?)"
+  //     try{
+  //         const result = await query(sqlSelectCartaColecao,[idColecao,nome])
+  //         return result
+  //     }catch(err){
+  //         return err
+  //     }
+  // }
+
     static async adicionarCarta(carta, idColecao,qtdCarta){
         const query = util.promisify(db.query).bind(db)
 

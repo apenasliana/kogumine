@@ -4,3 +4,6 @@ function visitarColecao(){
 function visitarBaralho(){
     window.location.href = '../baralho/baralho.html'  
 }
+function visitarContaSettings(){
+    window.location.href = '../conta/conta.html'  
+}

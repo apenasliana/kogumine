@@ -52,6 +52,35 @@ class UsuarioController {
         })
     }
 
+    static putUsuarioUsername(req,res){
+        const id = req.params.id
+        const username = req.body.username
+
+
+        UsuarioServico.putUsuarioUsername(username,id).then((result)=>{
+            res.send(result)
+        })
+    }
+
+    static putUsuarioSenha(req,res){
+        const id = req.params.id
+        const senha = req.body.senha
+
+
+        UsuarioServico.putUsuarioSenha(senha,id).then((result)=>{
+            res.send(result)
+        })
+    }
+    static putUsuarioEmail(req,res){
+        const id = req.params.id
+        const email = req.body.email
+
+
+        UsuarioServico.putUsuarioEmail(email,id).then((result)=>{
+            res.send(result)
+        })
+    }
+
     static autenticar(req,res){
         const email = req.body.email
         const senha = req.body.senha
