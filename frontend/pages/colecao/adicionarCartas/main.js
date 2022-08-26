@@ -7,7 +7,7 @@ async function addCarta(){
 
     const nome = data.name
     const raridade = data.rarity
-    console.log(data.prices.usd)
+    // console.log(data.prices.usd)
     let preco = data.prices.usd
         if(preco == null){
             preco = 0.01

@@ -17,7 +17,6 @@ class ColecaoServico{
     // get
     static async getCartasColecao(nome,idColecao){
       const query = util.promisify(db.query).bind(db)
-      //console.log(nome)
 
       const sqlSelectCardId = "SELECT id FROM carta WHERE nome = (?)"
       const sqlSelectCartaColecao = "SELECT colecao.id,colecao.idUsuario,carta.*, carta_colecao.qtdCarta FROM colecao JOIN carta_colecao ON carta_colecao.idColecao = colecao.id JOIN carta ON carta.id = carta_colecao.idCarta WHERE colecao.id = (?) AND carta_colecao.idCarta = (?)"
@@ -25,14 +24,12 @@ class ColecaoServico{
       try{
           const cardId = await query(sqlSelectCardId,nome)
           
-          console.log(cardId)
           const result = await query(sqlSelectCartaColecao,[idColecao,cardId[0].id])
-          console.log(result)
           return result
       }catch(err){
           return err
       }
-  }
+    }
   //   static async getCartasColecao(nome,idColecao){
   //     const query = util.promisify(db.query).bind(db)
       
@@ -52,7 +49,7 @@ class ColecaoServico{
 
       try{
         const retornarColecao = await query(sqlSelectColecao,idColecao)
-        console.log(retornarColecao)
+        // console.log(retornarColecao)
         return retornarColecao
 
       }catch(err){
@@ -117,8 +114,8 @@ class ColecaoServico{
       const query = util.promisify(db.query).bind(db);
 
       const colecao = await query("SELECT * FROM colecao WHERE id = (?) ",[idColecao])
-
       const novoCustoTotal = parseFloat(colecao[0].custoTotal) + parseFloat(carta.preco * qtdCarta)
+
       const novaQtdTotal = parseInt(colecao[0].totalCards) + parseInt(qtdCarta)
 
 
@@ -140,7 +137,7 @@ class ColecaoServico{
 
 
     }
-    static async removerCarta(id, idCarta) {
+    static async decrementarCarta(id, idCarta) {
         const query = util.promisify(db.query).bind(db);
         try {
           const carta = await query(
@@ -155,6 +152,7 @@ class ColecaoServico{
                 "DELETE FROM carta_colecao WHERE idColecao = (?) AND idCarta = (?)",
                 [id, idCarta]
               );
+
             } else {
               query(
                 "UPDATE carta_colecao SET qtdCarta = (?) WHERE idColecao = (?) AND idCarta = (?)",
@@ -162,10 +160,68 @@ class ColecaoServico{
               );
             }
           }
+          const cartaDados = await query("SELECT * FROM carta WHERE id = (?)",idCarta)
+          this.atualizarColecao(cartaDados[0], id, -1)
+          const qtdColecao = await query("SELECT totalCards FROM colecao WHERE id = (?)",id)
+          await query("UPDATE colecao SET totalCards = (?) WHERE id = (?)",[(qtdColecao[0].totalCards-1), id])
         } catch (err) {
           console.log(err);
         }
     }
+
+
+    static async incrementarCarta(id, idCarta) {
+      const query = util.promisify(db.query).bind(db);
+
+      try {
+        const carta = await query(
+          "SELECT * FROM carta_colecao WHERE idColecao = (?) AND idCarta = (?)",
+          [id, idCarta]
+        );
+  
+        if (carta.length != 0) {
+          let novaQuantidadeCarta = carta[0].qtdCarta + 1;
+          query(
+            "UPDATE carta_colecao SET qtdCarta = (?) WHERE idColecao = (?) AND idCarta = (?)",
+            [novaQuantidadeCarta, id, idCarta]
+          );
+        }
+        const cartaDados = await query("SELECT * FROM carta WHERE id = (?)",idCarta)
+        this.atualizarColecao(cartaDados[0], id, 1)
+        const qtdColecao = await query("SELECT totalCards FROM colecao WHERE id = (?)",id)
+        await query("UPDATE colecao SET totalCards = (?) WHERE id = (?)",[(qtdColecao[0].totalCards+1), id])
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    static async deletarCarta(id, idCarta) {
+      const query = util.promisify(db.query).bind(db);
+
+
+
+      try {
+        const carta = await query(
+          "SELECT * FROM carta_colecao WHERE idColecao = (?) AND idCarta = (?)",
+          [id, idCarta]
+        );
+  
+        if (carta.length != 0) {
+            query(
+              "DELETE FROM carta_colecao WHERE idColecao = (?) AND idCarta = (?)",
+              [id, idCarta]
+            );
+            const cartaDados = await query("SELECT * FROM carta WHERE id = (?)",idCarta)
+            this.atualizarColecao(cartaDados[0], id, -carta[0].qtdCarta)
+            const qtdColecao = await query("SELECT totalCards FROM colecao WHERE id = (?)",id)
+            await query("UPDATE colecao SET totalCards = (?) WHERE id = (?)",[(qtdColecao[0].totalCards - carta[0].qtdCarta), id])
+          }
+      } catch (err) {
+        console.log(err);
+      }
+
+    }
+
+
 
 }
 

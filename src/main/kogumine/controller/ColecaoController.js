@@ -64,16 +64,35 @@ class ColecaoController{
             res.send(result)
         })
     }
-    
-    static removerCarta(req,res){
+    static incrementarCarta(req,res){
         const idColecao = req.params.id
         const idCarta = req.params.idC
-        ColecaoServico.removerCarta(idColecao, idCarta).then((result)=>{
+        ColecaoServico.incrementarCarta(idColecao, idCarta).then((result)=>{
             res.send(result)
         })
 
-      }
+    }
+    
+    static decrementarCarta(req,res){
+        const idColecao = req.params.id
+        const idCarta = req.params.idC
+        ColecaoServico.decrementarCarta(idColecao, idCarta).then((result)=>{
+            res.send(result)
+        })
+
+    }
+
+    static deletarCarta(req,res){
+        const idColecao = req.params.id
+        const idCarta = req.params.idC
+        ColecaoServico.deletarCarta(idColecao, idCarta).then((result)=>{
+            res.send(result)
+        })
+
+
+    }
 }
+
 
 
 module.exports = ColecaoController

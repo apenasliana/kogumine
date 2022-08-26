@@ -27,12 +27,15 @@ router.post("/auth", UsuarioController.autenticar) // autenticador
 
 // colecao //
 
-router.post("/colecao/:id", ColecaoController.adicionarCarta)
-router.get("/colecao/:id", ColecaoController.listarCartasColecao)
-router.get("/colecao/:id/carta", ColecaoController.getCartasColecao) // 
-router.get("/colecao/:id/data", ColecaoController.getColecaoData)
+router.post("/colecao/:id", ColecaoController.adicionarCarta) //adiciona carta na coleccao
+router.get("/colecao/:id", ColecaoController.listarCartasColecao) // lista todas as cartas da colecao
+router.get("/colecao/:id/carta", ColecaoController.getCartasColecao) // lista uma carta da colecao
+router.get("/colecao/:id/data", ColecaoController.getColecaoData) // busca o DATA da colecao
 
-router.delete("/colecao/:id/carta/:idC", ColecaoController.removerCarta)
+router.delete("/colecao/:id/carta/:idC", ColecaoController.decrementarCarta) //remove uma UNIDADE da carta X
+router.patch("/colecao/:id/carta/:idC", ColecaoController.incrementarCarta) //adiciona uma UNIDADE da carta X
+router.delete("/colecao/:id/delcarta/:idC", ColecaoController.deletarCarta) //remove TODAS as cartas X
+
 
 
 // baralho //

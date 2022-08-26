@@ -25,6 +25,12 @@ function mostrarColecao(data){
     const listQtdCarta = document.createElement("p")
 
 
+
+    const deleteButton = document.createElement("button")
+    const addButton = document.createElement("button")
+    const removeButton = document.createElement("button")
+
+
     
     const listaDeCartas = document.getElementById("listaDeCartas")
 
@@ -35,11 +41,63 @@ function mostrarColecao(data){
     listItem.classList.add("list-item")
 
 
-    listItem.append(listNome,listRaridade,listPreco,listQtdCarta)
+    deleteButton.innerText = "X"
+    deleteButton.onclick = function (){
+        deletarCarta(data)
+    }
+
+
+    addButton.innerText = "+1"
+    addButton.onclick = function (){
+        incrementarCarta(data)
+    }
+
+
+    removeButton.innerText = "-1"
+    removeButton.onclick =  function (){
+        decrementarCarta(data)
+    }
+
+
+
+    listItem.append(listNome,listRaridade,listPreco,listQtdCarta,deleteButton,addButton,removeButton)
     listaDeCartas.append(listItem)
     
     
 }
+
+
+async function decrementarCarta(data){
+    const dadosUsuario = JSON.parse(localStorage.getItem('Usuario'))
+
+
+    await fetch(`http://localhost:3000/colecao/${dadosUsuario.idColecao}/carta/${data.id}`,{method:"DELETE",headers: {'Accept': 'application/json',
+    'Content-Type': 'application/json'}})
+
+    // document.location.reload()
+}
+async function incrementarCarta(data){
+    const dadosUsuario = JSON.parse(localStorage.getItem('Usuario'))
+
+
+    await fetch(`http://localhost:3000/colecao/${dadosUsuario.idColecao}/carta/${data.id}`,{method:"PATCH",headers: {'Accept': 'application/json',
+    'Content-Type': 'application/json'}})
+
+    // document.location.reload()
+}
+
+async function deletarCarta(data){
+    const dadosUsuario = JSON.parse(localStorage.getItem('Usuario'))
+
+
+    await fetch(`http://localhost:3000/colecao/${dadosUsuario.idColecao}/delcarta/${data.id}`,{method:"DELETE",headers: {'Accept': 'application/json',
+    'Content-Type': 'application/json'}})
+
+    // document.location.reload()
+
+
+}
+
 
 async function getColecaoDados(){
     const Usuario = JSON.parse(localStorage.getItem('Usuario'))
