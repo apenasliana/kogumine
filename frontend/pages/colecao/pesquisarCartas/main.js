@@ -11,9 +11,10 @@ async function searchId(){
 
     const arrayCartas = await resposta.json()
 
-    arrayCartas.forEach(element => {
-        return mostrarPesquisa(element)
-    });
+    return mostrarPesquisa(arrayCartas[0])
+    // arrayCartas.forEach(element => {
+    //     return mostrarPesquisa(element)
+    // });
 }
 
 
@@ -32,6 +33,8 @@ async function searchCard(){
 
 
 function mostrarPesquisa(data){
+    
+    
     const listItem = document.createElement("li")
     const listNome = document.createElement("p")
     const listRaridade = document.createElement("p")

@@ -12,6 +12,7 @@ async function getColecao(){
     const data = await response.json()
     
     data.forEach(element => {
+
         mostrarColecao(element)
     });
 }
