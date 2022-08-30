@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kogumine - Your Collection Page</title>
+    <title>Kogumine - SearchDeck Page</title>
     <link rel="stylesheet" href="style.css"/>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
@@ -19,24 +19,21 @@
                     <a href="../../home/home.html">
                         <img src="../../images/logo.png" alt="logo" class="logoimg">       
                     </a>
-                    <a href="../colecao.html">
+                    <a href="../baralho.html">
                         <button>back</button>
                     </a>
-                    <h2 id="">Adicionar Cartas</h2>
+                    <h2 id="">Deck Page</h2>
+
                 </div>
             </div>
             <div class="card">
                 <div class="login">
                     <form method="post">
-                        <input id="adicionarCarta" class="inputText" placeholder="Nome Da Carta" type="text"/>
-                        <input id="qtdCarta" class="inputText" placeholder="Quantidade" type="text"/>
-                        <button id="confirm" type="button" onClick="addCarta()">
-                            <div>
-                                <p>adicionarCarta</p>
-                            </div>
-                        </button>
+                        <ul id="baralhoData"></ul>
                     </form>
+                    <p>Cartas Do Deck:</p>
                     <ul id="listaDeCartas"></ul>
+
                 </div>
             </div>
     </section>
