@@ -138,6 +138,7 @@ async function criarDeck(nomeDeck, custoTotal, qtdCartas) {
       listaDeCartas: listaDeCartas
     })
   })
+  document.location.reload()
 }
 
 document.getElementById('qtdCarta').value = 1

@@ -2,7 +2,9 @@ function redirectDeck() {
   window.location.href = './criarBaralho/criarBaralho.html'
 }
 function searchDeck() {
-  window.location.href = './buscarBaralho/buscarBaralho.html'
+  const idBaralho = document.getElementById('buscarDeck').value
+
+  window.location.href = `./buscarBaralho/buscarBaralho.html?id=${idBaralho}`
 }
 
 async function getBaralho(idBaralho) {
@@ -40,8 +42,7 @@ async function mostrarBaralhos(data) {
 
   inspectButton.innerText = 'Inspecionar'
   inspectButton.onclick = function () {
-    // visitarDeck(data.id)
-    visitarDeck()
+    visitarDeck(data.id)
   }
   deleteButton.innerText = 'Deletar'
   deleteButton.onclick = function () {
@@ -75,7 +76,11 @@ async function deletarDeck(idBaralho) {
     headers: { Accept: 'application/json', 'Content-Type': 'application/json' }
   })
 
-  // document.location.reload()
+  document.location.reload()
+}
+
+function visitarDeck(idBaralho) {
+  window.location.href = `./buscarBaralho/buscarBaralho.html?id=${idBaralho}`
 }
 
 window.addEventListener('load', event => {

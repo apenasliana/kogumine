@@ -1,17 +1,15 @@
-async function getBaralho() {
-  const idBaralho = 20 // de onde vem??
+async function getBaralho(idBaralho) {
   const response = await fetch(
     `http://localhost:3000/baralho/${idBaralho}/search`
   )
   const data = await response.json()
   // console.log(data)
   mostrarBaralhoData(data)
-  getBaralhoDados()
+  getBaralhoDados(idBaralho)
 
   return data
 }
-async function getBaralhoDados() {
-  const idBaralho = 20 // de onde vem??
+async function getBaralhoDados(idBaralho) {
   const response = await fetch(
     `http://localhost:3000/baralho/${idBaralho}/data`
   )
@@ -66,5 +64,6 @@ function mostrarBaralho(data) {
 }
 
 window.addEventListener('load', event => {
-  getBaralho()
+  const params = new URLSearchParams(window.location.search)
+  getBaralho(params.get('id'))
 })

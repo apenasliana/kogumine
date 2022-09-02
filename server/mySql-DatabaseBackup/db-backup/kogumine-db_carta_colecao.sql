@@ -1,13 +1,13 @@
--- MariaDB dump 10.19  Distrib 10.8.3-MariaDB, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: kogumine-db
+-- Host: localhost    Database: kogumine-db
 -- ------------------------------------------------------
--- Server version	10.8.3-MariaDB
+-- Server version	8.0.30
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -16,33 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `usuarios`
+-- Table structure for table `carta_colecao`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
+DROP TABLE IF EXISTS `carta_colecao`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(24) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `senha` varchar(24) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `carta_colecao` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idCarta` int NOT NULL,
+  `idColecao` int NOT NULL,
+  `qtdCarta` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
-  UNIQUE KEY `username_UNIQUE` (`username`),
-  UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  KEY `idColecao_idx` (`idColecao`),
+  KEY `idCarta_idx` (`idCarta`),
+  CONSTRAINT `idCarta` FOREIGN KEY (`idCarta`) REFERENCES `carta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `idColecao` FOREIGN KEY (`idColecao`) REFERENCES `colecao` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `usuarios`
+-- Dumping data for table `carta_colecao`
 --
 
-LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES
-(34,'teste','teste','teste');
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+LOCK TABLES `carta_colecao` WRITE;
+/*!40000 ALTER TABLE `carta_colecao` DISABLE KEYS */;
+INSERT INTO `carta_colecao` VALUES (53,13,19,1);
+/*!40000 ALTER TABLE `carta_colecao` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-26 11:56:00
+-- Dump completed on 2022-08-30 18:23:04

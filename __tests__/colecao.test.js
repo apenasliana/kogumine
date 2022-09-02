@@ -1,7 +1,7 @@
 //testes unitario para a colecao//
 const supertest = require('supertest')
 const router = require('../server/routes')
-const UsuarioController = require('../src/main/kogumine/controller/UsuarioController')
+const ColecaoController = require('../src/main/kogumine/controller/ColecaoController')
 
 //adicionar cartas na colecao//
 test('nao foi possivel cadastrar carta', async () => {
